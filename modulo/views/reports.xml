@@ -1,0 +1,91 @@
+<odoo>
+
+  <record id="formulario_pf" model="py3o.template">
+    <field name="name">Persona Fisica</field>
+    <field name="filetype">ods</field>
+  </record>
+
+  <record id="formulario_pf_py3o" model="ir.actions.report">
+    <field name="name">Persona Fisica
+    </field>
+    <field name="type">ir.actions.report</field>
+    <field name="model">real.estate.custom.doc</field>
+    <field name="report_name">1</field>
+    <field name="report_type">py3o</field>
+    <field name="py3o_filetype">ods</field>
+    <field name="module">modulo</field>
+    <field name="py3o_template_id" ref="formulario_pf"/>
+    <field name="py3o_template_fallback">
+      /report/no_template.odt
+    </field>
+    <field name="binding_model_id" ref="modulo.model_real_estate_custom_doc"/>
+    <field name="binding_type">report</field>
+  </record>
+
+  <record id="formulario_pj" model="py3o.template">
+    <field name="name">Persona Juridica</field>
+    <field name="filetype">ods</field>
+  </record>
+
+  <record id="formulario_pj_py3o" model="ir.actions.report">
+    <field name="name">Persona Juridica
+    </field>
+    <field name="type">ir.actions.report</field>
+    <field name="model">real.estate.custom.doc_juridica</field>
+    <field name="report_name">2</field>
+    <field name="report_type">py3o</field>
+    <field name="py3o_filetype">ods</field>
+    <field name="module">modulo</field>
+    <field name="py3o_template_id" ref="formulario_pf"/>
+    <field name="py3o_template_fallback">
+      /report/no_template.odt
+    </field>
+    <field name="binding_model_id" ref="modulo.model_real_estate_custom_doc_juridica"/>
+    <field name="binding_type">report</field>
+  </record>
+
+  <record id="formulario_db" model="py3o.template">
+    <field name="name">Formulario de Debida Diligencia</field>
+    <field name="filetype">ods</field>
+  </record>
+
+  <record id="formulario_db_py3o" model="ir.actions.report">
+    <field name="name">Formulario de Debida Diligencia
+    </field>
+    <field name="type">ir.actions.report</field>
+    <field name="model">real.estate.custom.doc.formulario</field>
+    <field name="report_name">3</field>
+    <field name="report_type">py3o</field>
+    <field name="py3o_filetype">ods</field>
+    <field name="module">modulo</field>
+    <field name="py3o_template_id" ref="formulario_db"/>
+    <field name="py3o_template_fallback">
+      /report/no_template.odt
+    </field>
+    <field name="binding_model_id" ref="modulo.model_real_estate_custom_doc_formulario"/>
+    <field name="binding_type">report</field>
+  </record>
+
+  <record id="formulario_db_fide" model="py3o.template">
+    <field name="name">Formulario de Debida Diligencia Fideicomiso</field>
+    <field name="filetype">odt</field>
+  </record>
+
+  <record id="formulario_db_fide_py3o" model="ir.actions.report">
+    <field name="name">Formulario de Debida Diligencia Fideicomiso
+    </field>
+    <field name="type">ir.actions.report</field>
+    <field name="model">real.estate.custom.doc.formulario.fideicomitente</field>
+    <field name="report_name">4</field>
+    <field name="report_type">py3o</field>
+    <field name="py3o_filetype">odt</field>
+    <field name="module">modulo</field>
+    <field name="py3o_template_id" ref="formulario_db_fide"/>
+    <field name="py3o_template_fallback">
+      /report/no_template.odt
+    </field>
+    <field name="binding_model_id" ref="modulo.model_real_estate_custom_doc_formulario_fideicomitente"/>
+    <field name="binding_type">report</field>
+  </record>
+
+</odoo>

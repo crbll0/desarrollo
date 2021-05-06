@@ -1,0 +1,555 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="formulario_pf_list_view">
+            <field name="name">Formulario Vinculacion PF</field>
+            <field name="model">real.estate.custom.doc</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="primer_nombre"/>
+                    <field name="segundo_nombre"/>
+                    <field name="primer_apellido"/>
+                    <field name="segundo_apellido"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="formulario_pf_form_view">
+            <field name="name">Formularion Vinculacion PF</field>
+            <field name="model">real.estate.custom.doc</field>
+            <field name="arch" type="xml">
+                <form string="Formulario Persona Fisica">
+                    <sheet>
+                        <h2>Formulario Persona Fisica</h2>
+                        <group string="Datos Personales">
+                            <group>
+                                <field name="primer_nombre"/>
+                                <field name="segundo_nombre"/>
+                            </group>
+                            <group>
+                                <field name="primer_apellido"/>
+                                <field name="segundo_apellido"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="tipo_de_documento"/>
+                                <field name="sexo"/>
+                                <field name="estado_civil"/>
+                            </group>
+                            <group>
+                                <field name="documento"/>
+                                <field name="nacimiento"/>
+                                <field name="ciudadania_o_res_extranjera"/>
+                                <field name="nacionalidad_de_orig"/>
+                            </group>
+                            <group>
+                                <field name="nacimiento"/>
+                                <field name="ciudad"/>
+                                <field name="nacionalidad_adquirida"/>
+                            </group>
+                            <group>
+                                <field name="dependientes"/>
+                                <field name="soc_security"/>
+                            </group>
+                            <group>
+                                <field name="nivel_academico"/>
+                                <field name="profesion"/>
+                                <field name="ocupacion"/>
+                            </group>
+                        </group>
+
+                        <group string="Dirrecion del Cliente">
+                            <group>
+                                <field name="direccion"/>
+                                <field name="sector"/>
+                                <field name="domicilio"/>
+                                <field name="municipio"/>
+                                <field name="provincia"/>
+                                <field name="pais"/>
+                            </group>
+                            <group>
+                                <field name="tel_casa"/>
+                                <field name="tel_cel"/>
+                                <field name="tel_ofic"/>
+                                <field name="otros"/>
+                                <field name="e_mail"/>
+                            </group>
+                            <group colspan="4">
+                                <field name="entrega_correspondencia"/>
+                                <field name="tipo_de_vivienda"/>
+                            </group>
+                        </group>
+
+                        <group string="Direccion del Cliente en el extranjero (si aplica)">
+                            <field name="calle"/>
+                            <field name="no"/>
+                            <field name="edificio"/>
+                            <field name="apartamento"/>
+                            <field name="codigo_postal"/>
+                            <field name="pais_direccion"/>
+                            <field name="ciudad_direccion"/>
+                            <field name="estado"/>
+                            <field name="tel_extranjero"/>
+                            <field name="otro_tel"/>
+                        </group>
+
+                        <group string="Datos del Conyugue (si aplica)">
+                            <field name="nombre"/>
+                            <field name="apellidos"/>
+                            <field name="cedula_pasaporte"/>
+                            <field name="nacionalidad"/>
+                            <field name="fecha_de_nacimiento"/>
+                            <field name="lugar_de_nacimiento"/>
+                            <field name="ocupacion_conyugue"/>
+                            <field name="ingresos_anuales"/>
+                            <field name="telefono"/>
+                            <field name="telefono_movil"/>
+                            <field name="correo_e_mail"/>
+                        </group>
+
+                        <group string="Informacion Laboral / Financiera">
+                            <group>
+                                <field name="actividad_principal"/>
+                                <field name="tipo_de_contrato"/>
+                                <field name="labora_empresa"/>
+                                <field name="labora_cargo_que_ocupa"/>
+                                <field name="labora_fecha_de_ingreso"/>
+                            </group>
+                            <group>
+                                <field name="labora_direccion"/>
+                                <field name="labora_sector"/>
+                                <field name="labora_municipio"/>
+                                <field name="labora_provincia"/>
+                                <field name="labora_pais"/>
+                            </group>
+                            <group>
+                                <field name="labora_telefono"/>
+                                <field name="labora_fax"/>
+                                <field name="labora_correo"/>
+                            </group>
+                            <group>
+                                <field name="labora_ing_mensuales"/>
+                                <field name="labora_ing_extraordinarios"/>
+                                <field name="labora_antiguedad"/>
+                                <field name="labora_anos"/>
+                                <field name="labora_meses"/>
+                            </group>
+                            <group>
+                                <field name="sector_de_la_empresa"/>
+                                <field name="actividad_principal_de_la_empresa"/>
+                                <field name="otro_indicar"/>
+                            </group>
+                            <group>
+                                <field name="fuente_de_ingreso"/>
+                                <field name="ingresos_mensuales"/>
+                                <field name="ingresos_totales"/>
+                                <field name="regimen_al_que_pertenece"/>
+                            </group>
+                            <field name='banco_ids' nolabel="1">
+                                <tree editable='top'>
+                                    <field name='doc_id' invisible="1"/>
+                                    <field name='banco'/>
+                                    <field name='tipo_cuenta'/>
+                                    <field name='moneda'/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name='cant1'/>
+                                <field name='descripcion1'/>
+                                <field name='hipoteca1'/>
+                            </group>
+                            <group>
+                                <field name='cant2'/>
+                                <field name='descripcion2'/>
+                                <field name='hipoteca2'/>
+                            </group>
+                            <group>
+                                <field name='cant3'/>
+                                <field name='descripcion3'/>
+                                <field name='hipoteca3'/>
+                            </group>
+                            <group>
+                                <field name='cant4'/>
+                                <field name='descripcion4'/>
+                                <field name='hipoteca4'/>
+                            </group>
+                        </group>
+                        <group string="Persosnas Politicamente Expuestas (PEPs)">
+                            <label for="es_usted_o_ha_sido_una_persona_pep"/>
+                            <group>
+                                <field name="es_usted_o_ha_sido_una_persona_pep" nolabel="1"/>
+                            </group>
+
+                        </group>
+                        <group>
+                                <field name="cercania_persona_pep"/>
+                            <group>
+                                <field name="nombre_del_pep"/>
+                                <field name="parentesco"/>
+                                <field name="cargo"/>
+                                <field name="peps_pais"/>
+                                <field name="fecha_de_designacion"/>
+                                <field name="fecha_de_remocion"/>
+                            </group>
+                            <group>
+                                <field name="tipo_bienes"/>
+                                <field name="especificar"/>
+                                <field name="recursos_provienen_de"/>
+                                <field name="especificar2"/>
+                                <field name="pais_de_origen_de_los_recursos"/>
+                                <field name="pais_procedencia_recursos"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--
+        <record model="ir.ui.view" id="course_search_view">
+            <field name="name">course.search</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+        -->
+
+
+        <record model="ir.actions.act_window" id="formulario_vinculacion_action_window">
+            <field name="name">Formularion de Vinculacion</field>
+            <field name="res_model">real.estate.custom.doc</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Formularios de Vinculacion" id="formulario" parent="contacts.menu_contacts"/>
+        <menuitem name="Persona Fisica" id="formulario_pf" parent="formulario"
+                  action="formulario_vinculacion_action_window"/>
+
+        <!--Datos Formulario Persona Juridica-->
+        <record model="ir.ui.view" id="formulario_pj_list_view">
+            <field name="name">Formulario Vinculacion PJ</field>
+            <field name="model">real.estate.custom.doc_juridica</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre_de_la_compania"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="formulario_pj_form_view">
+            <field name="name">Formularion Vinculacion PJ</field>
+            <field name="model">real.estate.custom.doc_juridica</field>
+            <field name="arch" type="xml">
+                <form string="Formulario Persona Juridica">
+                    <sheet>
+                        <h2>Formulario Persona Juridica</h2>
+                        <group>
+                            <group>
+                                <field name="nombre_de_la_compania"/>
+                                <field name="rnc_identificacion"/>
+
+                                <field name="direccion"/>
+                                <field name="sector"/>
+                                <field name="ciudad"/>
+                                <field name="pais"/>
+                            </group>
+                            <group>
+                                <field name="repres_legal"/>
+                                <field name="posicion"/>
+                                <field name="email"/>
+                                <field name="website"/>
+                                <field name="telefono"/>
+                            </group>
+                        </group>
+
+
+                        <group string="">
+                            <group>
+                                <field name="activ_principal_y_secund"/>
+                                <field name="promedio_mensual_de_ventas"/>
+                                <field name="fax"/>
+                            </group>
+                            <group>
+                                <field name="tipo_de_organizacion_o_empresa"/>
+                                <field name="otros"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="actividades_del_negocio"/>
+                                <field name="tipo_de_operacion"/>
+                                <field name="numero_de_empleados"/>
+                                <field name="anos_de_operacion"/>
+                                <field name="porcentaje_de_participacion"/>
+                                <field name="tamano_del_negocio"/>
+                                <field name="capital_social"/>
+                                <field name="lugar_de_constitucion"/>
+                                <field name="fecha_de_constitucion"/>
+                                <field name="indicar_cambios_recientes"/>
+                                <field name="indicar_otros"/>
+                                <field name="la_organizacion_esta_experimentando_dificultades_financieras"/>
+                                <field name="especificar"/>
+                            </group>
+
+                            <field name="entidades_ids" nolable="1">
+                                <tree editable="top">
+                                    <field name="doc_id" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="filial"/>
+                                    <field name="subsidiaria"/>
+                                    <field name="is_ge"/>
+                                    <field name="is_gf"/>
+                                    <field name="pais"/>
+                                </tree>
+                            </field>
+
+                            <p colspan="4">Nombre del propietario, país de residencia legal y porcentaje accionario de las entidades indicadas en el punto anterior</p>
+                            <field name="propietarios_ids" nolable="1">
+                                <tree editable="top">
+                                    <field name="doc_id" invisible="1"/>
+                                    <field name="nombre_del_propietario_mayoritario"/>
+                                    <field name="entidad"/>
+                                    <field name="pais_de_residencia_legal"/>
+                                    <field name="porcent_accionario"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="ultimos_10_anos"/>
+                                <field name="si_es_negativa"/>
+                            </group>
+                            
+                            <p>Completar el siguiente cuadro con información relativa a los accionistas y directivos de la organización</p>
+                            <field name="accionistas_ids" nolable="1">
+                                <tree editable="top">
+                                    <field name="doc_id" invisible="1"/>
+                                    <field name="nombres_y_apellidos"/>
+                                    <field name="cedula"/>
+                                    <field name="cargo"/>
+                                    <field name="pais_de_residencia"/>
+                                </tree>
+                            </field>
+
+                            <p>Principales Suplidores/ Referencias Comerciales</p>
+                            <field name="suplidores_ids" nolable="1">
+                                <tree editable="top">
+                                    <field name="doc_id" invisible="1"/>
+                                    <field name="nombre"/>
+                                    <field name="ubicacion"/>
+                                    <field name="telefono"/>
+                                </tree>
+                            </field>
+
+                            <p>Informacion Bancaria</p>
+                            <field name="bancos_ids" nolable="1">
+                                <tree editable="top">
+                                    <field name="doc_id" invisible="1"/>
+                                    <field name="no_cuenta"/>
+                                    <field name="banco"/>
+                                    <field name="tipo_de_cuenta"/>
+                                </tree>
+                            </field>
+
+                            <label for="existe_alguna_figura_publica_o_pep"></label>
+                            <field nolabel="1" name="existe_alguna_figura_publica_o_pep"/>
+
+                            <label for="en_caso_de_afirmativo"></label>
+                            <field nolabel="1" name="en_caso_de_afirmativo"/>
+
+                            <label for="cargo"></label>
+                            <field nolabel="1" name="cargo"/>
+
+                            <label for="pais"></label>
+                            <field nolabel="1" name="pais"/>
+
+                            <label for="fecha_de_designacion"></label>
+                            <field nolabel="1" name="fecha_de_designacion"/>
+
+                            <label for="fecha_de_remocion"></label>
+                            <field nolabel="1" name="fecha_de_remocion"/>
+
+
+                            <label for="con_el_proposito_de_ley_155_17"></label>
+                            <field nolabel="1" name="con_el_proposito_de_ley_155_17"/>
+                            <label for="los_bienes_son_de"></label>
+                            <field nolabel="1" name="los_bienes_son_de"/>
+                            <label for="los_recursos_que_entregue_son"></label>
+                            <field nolabel="1" name="los_recursos_que_entregue_son"/>
+                            <label for="otros_especificar"></label>
+                            <field nolabel="1" name="otros_especificar"/>
+
+                            <label for="pais_de_origen_recursos"/>
+                            <field nolabel="1" name="pais_de_origen_recursos"/>
+                            <label for="otros_pais_cual"></label>
+                            <field nolabel="1" name="otros_pais_cual"/>
+                            <label for="declaro_que_los_recursos_que_entregue"></label>
+                            <field nolabel="1" name="declaro_que_los_recursos_que_entregue"/>
+
+                            <label for="no_admitire_que_terceros"/>
+                            <field nolabel="1" name="no_admitire_que_terceros"/>
+
+                            <label for="firma_del_representante_legal"></label>
+                            <field nolabel="1" name="firma_del_representante_legal"/>
+                            <label for="sello_de_la_compania"></label>
+                            <field nolabel="1" name="sello_de_la_compania"/>
+                            <label for="cliente_vinculado"></label>
+                            <field nolabel="1" name="cliente_vinculado"/>
+                            <label for="fecha"></label>
+                            <field nolabel="1" name="fecha"/>
+                            <label for="representante_de_ventas"></label>
+                            <field nolabel="1" name="representante_de_ventas"/>
+                            <label for="oficial_de_cumplimiento"></label>
+                            <field nolabel="1" name="oficial_de_cumplimiento"/>
+                            <label for="directora_general"></label>
+                            <field nolabel="1" name="directora_general"/>
+
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <!--
+        <record model="ir.ui.view" id="course_search_view">
+            <field name="name">course.search</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+        -->
+
+
+        <record model="ir.actions.act_window" id="formulario_pj_vinculacion_action_window">
+            <field name="name">Formularion de Vinculacion</field>
+            <field name="res_model">real.estate.custom.doc_juridica</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Persona Juridica" id="formulario_pj" parent="formulario"
+                  action="formulario_pj_vinculacion_action_window"/>
+
+        <!--Datos Formulario la Nacional-->
+<!--        <record model="ir.ui.view" id="formulario_nacional_list_view">-->
+<!--            <field name="name">Formulario Vinculacion nacional</field>-->
+<!--            <field name="model">real.estate.custom.doc_lanacional</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="nombres"/>-->
+<!--                    <field name="apellidos"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.view" id="formulario_nacional_form_view">-->
+<!--            <field name="name">Formularion Vinculacion La Nacional</field>-->
+<!--            <field name="model">real.estate.custom.doc_lanacional</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Formulario La Nacional">-->
+<!--                    <sheet>-->
+<!--                        <h2>Formulario La Nacional</h2>-->
+<!--                        <group string="Datos Personales">-->
+<!--                            <field name="nombres"/>-->
+<!--                            <field name="apellidos"/>-->
+<!--                            <field name="apodo"/>-->
+<!--                            <field name="fecha_de_nacimiento"/>-->
+<!--                            <field name="sexo"/>-->
+<!--                            <field name="cedula"/>-->
+<!--                            <field name="pasaporte"/>-->
+<!--                            <field name="vencimiento"/>-->
+<!--                            <field name="cods"/>-->
+<!--                            <field name="pais"/>-->
+<!--                            <field name="resid_o_ciud"/>-->
+<!--                            <field name="no_ss"/>-->
+<!--                            <field name="nac_adquirida"/>-->
+<!--                            <field name="estado_civil"/>-->
+<!--                            <field name="profesion_ocup"/>-->
+<!--                            <field name="empleador"/>-->
+<!--                            <field name="posicion"/>-->
+<!--                            <field name="ingreso"/>-->
+<!--                            <field name="ingresos_mens"/>-->
+<!--                            <field name="pensionado"/>-->
+<!--                            <field name="ha_sido_funcionario"/>-->
+<!--                            <field name="es_pariente_de"/>-->
+<!--                            <field name="otros_ingresos"/>-->
+<!--                            <field name="proveniencia_de"/>-->
+<!--                            <field name="calle"/>-->
+<!--                            <field name="no"/>-->
+<!--                            <field name="edif"/>-->
+<!--                            <field name="apto"/>-->
+<!--                            <field name="sector"/>-->
+<!--                            <field name="ciudad"/>-->
+<!--                            <field name="pais"/>-->
+<!--                            <field name="telefono"/>-->
+<!--                            <field name="celular"/>-->
+<!--                            <field name="email"/>-->
+<!--                            <field name="proyecto"/>-->
+<!--                            <field name="inmobiliaria"/>-->
+<!--                            <field name="valor"/>-->
+<!--                            <field name="financiamiento"/>-->
+<!--                            <field name="plazo"/>-->
+<!--                            <field name="nombre"/>-->
+<!--                            <field name="direccion"/>-->
+<!--                            <field name="telefono"/>-->
+<!--                            <field name="nombre1"/>-->
+<!--                            <field name="direccion1"/>-->
+<!--                            <field name="telefono1"/>-->
+<!--                            <field name="nombre2"/>-->
+<!--                            <field name="direccion2"/>-->
+<!--                            <field name="telefono2"/>-->
+<!--                            <field name="documentos_anexos"/>-->
+<!--                            <field name="calificacion_fatca"/>-->
+<!--                            <field name="entrevista"/>-->
+<!--                            <field name="firma_cliente"/>-->
+<!--                            <field name="identificacion"/>-->
+<!--                            <field name="fecha"/>-->
+
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!--
+        <record model="ir.ui.view" id="course_search_view">
+            <field name="name">course.search</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+        -->
+
+
+<!--        <record model="ir.actions.act_window" id="formulario_lanacional_vinculacion_action_window">-->
+<!--            <field name="name">Formularion de Vinculacion</field>-->
+<!--            <field name="res_model">real.estate.custom.doc_lanacional</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem name="La Nacional" id="formulario_nacional" parent="formulario"-->
+<!--                  action="formulario_lanacional_vinculacion_action_window"/>-->
+
+
+    </data>
+</odoo>
+
+

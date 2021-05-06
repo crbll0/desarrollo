@@ -1,0 +1,6 @@
+<odoo>
+	<record id="documentos" model="res.groups">
+		<field name="name">Formularios de Vinculacion</field>
+	</record>
+</odoo>
+

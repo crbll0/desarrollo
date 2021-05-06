@@ -1,0 +1,562 @@
+<odoo>
+    <data>
+        <record id="real_estate_form_diligence" model="ir.ui.view">
+            <field name="name">Formulario de debida diligencia</field>
+            <field name="model">real.estate.custom.doc.formulario</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Datos generales del cliente">
+                            <group>
+                                <field name="name"/>
+                                <field name="lastname"/>
+                                <field name="email"/>
+                                <field name="sex"/>
+                            </group>
+                            <group>
+                                <field name="marital"/>
+                                <field name="econ_activity"/>
+                                <field name="work_sector"/>
+                                <field name="birth"/>
+                            </group>
+                            <group>
+                                <field name="birth"/>
+                                <field name="doc_type"/>
+                                <field name="id_doc"/>
+                                <field name="nation_q"/>
+                            </group>
+
+                            <field name="residences_ids">
+                                <tree editable="bottom">
+                                    <field name="residence_ref" invisible="1"/>
+                                    <field name="country"/>
+                                    <field name="citizen"/>
+                                    <field name="residence"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="residence_q"/>
+                                <p> Especifique su eleccion</p>
+                                <field name="usa_citizen"/>
+                                <field name="usa_resident"/>
+                            </group>
+
+                            <field name="passports_ids">
+                                <tree editable="bottom">
+                                    <field name="passport_refs" invisible="1"/>
+                                    <field name="extra_passport"/>
+                                    <field name="passport_date"/>
+                                    <field name="passport_expire"/>
+                                    <field name="passport_nation"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="additional_id"/>
+                                <field name="social_id"/>
+                            </group>
+                            <group>
+                                <field name="address_street"/>
+                                <field name="address_no"/>
+                                <field name="address_bulding"/>
+                                <field name="address_aprtmnt"/>
+                            </group>
+                            <group>
+                                <field name="country"/>
+                                <field name="city"/>
+                                <field name="sector"/>
+                            </group>
+                            <group>
+                                <field name="residence_phone"/>
+                                <field name="mobile"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="us_phone"/>
+                                <field name="us_accounts"/>
+                                <field name="us_person"/>
+                                <field name="us_transaction"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion FATCA">
+                            <group>
+                                <field name="fatca_form"/>
+                                <field name="fatca_date"/>
+                            </group>
+                            <group>
+                                <field name="us_address"/>
+                                <field name="us_address_city"/>
+                                <field name="us_address_sector"/>
+                                <field name="us_address_sector"/>
+                            </group>
+                        </group>
+
+                        <group string="Lugar de Trabajo/Empleo/Ocupación/Ingresos">
+                            <group>
+                                <field name="income_origin"/>
+                                <field name="patrimony"/>
+                                <field name="company_name"/>
+                                <field name="company_activity"/>
+                            </group>
+                            <group>
+                                <field name="occupation"/>
+                                <field name="company_time"/>
+                                <field name="company_phone"/>
+                                <field name="company_postal"/>
+                            </group>
+                            <group>
+                                <field name="company_region"/>
+                                <field name="company_address"/>
+                                <field name="company_address_no"/>
+                                <field name="company_building"/>
+                            </group>
+                            <group>
+                                <field name="company_floor"/>
+                                <field name="company_country"/>
+                                <field name="company_city"/>
+                                <field name="company_sector"/>
+                            </group>
+                            <group>
+                                <field name="monthly_income"/>
+                                <field name="other_income"/>
+                                <field name="company_email"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion Comercial">
+                            <field name="banks_ids">
+                                <tree editable="bottom">
+                                    <field name="bank_refs" invisible="1"/>
+                                    <field name="acc_num"/>
+                                    <field name="acc_type"/>
+                                    <field name="acc_coin"/>
+                                    <field name="acc_opening"/>
+                                    <field name="acc_entity"/>
+                                    <field name="acc_country"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Referencias Comerciales y Personales">
+                            <field name="commercial_info">
+                                <tree editable="bottom">
+                                    <field name="comercial_ref" invisible="1"/>
+                                    <field name="name_last"/>
+                                    <field name="contact_phone"/>
+                                    <field name="relation_type"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Principales Clientes o Segmento de Clientes (Solo para independientes)">
+                            <field name="clients_refs">
+                                <tree>
+                                    <field name="client_refs" invisible="1"/>
+                                    <field name="names"/>
+                                    <field name="contact_num"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Principales Proveedores (Solo para independientes)">
+                            <field name="provider_refs">
+                                <tree>
+                                    <field name="provider_ref" invisible="1"/>
+                                    <field name="names"/>
+                                    <field name="contact_num"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Informacion sobre Personas Politicamente Expuestas (PEPs)">
+                            <group>
+                                <field name="question_pep"/>
+                                <field name="gobv_position"/>
+                                <field name="position_date"/>
+                                <field name="gobv_country"/>
+                            </group>
+                            <group>
+                                <field name="gobv_institution"/>
+                                <field name="gobv_country"/>
+                            </group>
+                            <group>
+                                <field name="question2_pep"/>
+                                <field name="pep_name"/>
+                                <field name="afinity_lvl"/>
+                                <field name="gobv_position2"/>
+                            </group>
+                            <group>
+                                <field name="position_date2"/>
+                                <field name="gobv_institution2"/>
+                                <field name="gobv_country2"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion sobre los productos">
+                            <group>
+                                <field name="high_adquisition"/>
+                                <field name="low_adquisition"/>
+                                <field name="other_adquisition"/>
+                            </group>
+                            <group>
+                                <field name="fideicomisio_name"/>
+                                <field name="global_amount_goods"/>
+                            </group>
+                        </group>
+
+                        <group string="Cantidad Mensual Estimada de Transacciones">
+                            <group>
+                                <field name="transaction_type"/>
+                                <field name="volumen_expected"/>
+                                <field name="payments"/>
+                                <field name="transaction_channel_cash"/>
+                                <field name="transaction_channel_inter"/>
+                            </group>
+                        </group>
+
+                        <group string="Volumen Mensual y forma de Transacciones">
+                            <group>
+                                <field name="expected_transactions"/>
+                                <field name="principal_transaction_type"/>
+                                <field name="transaction_channel_cash2"/>
+                                <field name="transaction_channel_inter2"/>
+                            </group>
+                            <group>
+                                <field name="inter_transaction_q"/>
+                                <field name="inter_transaction_country"/>
+                            </group>
+                        </group>
+
+                        <group string="Inicial">
+                            <group>
+                                <field name="initial_text"/>
+                                <field name="initial_float"/>
+                            </group>
+                        </group>
+
+                        <group string="Proposito de la Adquisicion o Inversion (Realice una breve descripcion)">
+                            <field name="reason" nolabel="1"/>
+                        </group>
+
+                        <group string="Origen de los Fondos">
+                            <field name="funds_origin" nolabel="1"/>
+                        </group>
+
+                        <group string="Informacion del Proyecto">
+                            <group>
+                                <field name="project_name"/>
+                                <field name="type_payment"/>
+                                <field name="fase"/>
+                            </group>
+
+                            <field name="project_refs">
+                                <tree editable="bottom">
+                                    <field name="project_ref" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="day"/>
+                                    <field name="month"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="real_estate_form_diligence_fideicomisio" model="ir.ui.view">
+            <field name="name">Formulario de debida diligencia Fideicomitente</field>
+            <field name="model">real.estate.custom.doc.formulario.fideicomitente</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Datos generales del cliente">
+                            <group>
+                                <field name="name"/>
+                                <field name="lastname"/>
+                                <field name="email"/>
+                                <field name="sex"/>
+                            </group>
+                            <group>
+                                <field name="marital"/>
+                                <field name="econ_activity"/>
+                                <field name="work_sector"/>
+                                <field name="birth_place"/>
+                            </group>
+                            <group>
+                                <field name="birth"/>
+                                <field name="doc_type"/>
+                                <field name="id_doc"/>
+                                <field name="nationality"/>
+                                <field name="nation_q"/>
+                            </group>
+
+                            <field name="residences_ids">
+                                <tree editable="bottom">
+                                    <field name="residence_ref" invisible="1"/>
+                                    <field name="country"/>
+                                    <field name="citizen"/>
+                                    <field name="residence"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="residence_q"/>
+                                <p> Especifique su eleccion</p>
+                                <field name="usa_citizen"/>
+                                <field name="usa_resident"/>
+                            </group>
+
+                            <field name="passports_ids">
+                                <tree editable="bottom">
+                                    <field name="passport_refs" invisible="1"/>
+                                    <field name="extra_passport"/>
+                                    <field name="passport_date"/>
+                                    <field name="passport_expire"/>
+                                    <field name="passport_nation"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="additional_id"/>
+                                <field name="social_id"/>
+                            </group>
+                            <group>
+                                <field name="address_street"/>
+                                <field name="address_no"/>
+                                <field name="address_bulding"/>
+                                <field name="address_aprtmnt"/>
+                            </group>
+                            <group>
+                                <field name="country"/>
+                                <field name="city"/>
+                                <field name="sector"/>
+                            </group>
+                            <group>
+                                <field name="residence_phone"/>
+                                <field name="mobile"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="us_phone"/>
+                                <field name="us_accounts"/>
+                                <field name="us_person"/>
+                                <field name="us_transaction"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion FATCA">
+                            <group>
+                                <field name="fatca_form"/>
+                                <field name="fatca_date"/>
+                            </group>
+                            <group>
+                                <field name="us_address"/>
+                                <field name="us_address_city"/>
+                                <field name="us_address_sector"/>
+                                <field name="us_address_sector"/>
+                            </group>
+                        </group>
+
+                        <group string="Lugar de Trabajo/Empleo/Ocupación/Ingresos">
+                            <group>
+                                <field name="income_origin"/>
+                                <field name="patrimony"/>
+                                <field name="company_name"/>
+                                <field name="company_activity"/>
+                            </group>
+                            <group>
+                                <field name="occupation"/>
+                                <field name="company_time"/>
+                                <field name="company_phone"/>
+                                <field name="company_postal"/>
+                            </group>
+                            <group>
+                                <field name="company_region"/>
+                                <field name="company_address"/>
+                                <field name="company_address_no"/>
+                                <field name="company_building"/>
+                            </group>
+                            <group>
+                                <field name="company_floor"/>
+                                <field name="company_country"/>
+                                <field name="company_city"/>
+                                <field name="company_sector"/>
+                            </group>
+                            <group>
+                                <field name="monthly_income"/>
+                                <field name="other_income"/>
+                                <field name="company_email"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion Comercial">
+                            <field name="banks_ids">
+                                <tree editable="bottom">
+                                    <field name="bank_refs" invisible="1"/>
+                                    <field name="acc_num"/>
+                                    <field name="acc_type"/>
+                                    <field name="acc_coin"/>
+                                    <field name="acc_opening"/>
+                                    <field name="acc_entity"/>
+                                    <field name="acc_country"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Referencias Comerciales y Personales">
+                            <field name="commercial_info">
+                                <tree editable="bottom">
+                                    <field name="comercial_ref" invisible="1"/>
+                                    <field name="name_last"/>
+                                    <field name="contact_phone"/>
+                                    <field name="relation_type"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Principales Clientes o Segmento de Clientes (Solo para independientes)">
+                            <field name="clients_refs">
+                                <tree>
+                                    <field name="client_refs" invisible="1"/>
+                                    <field name="names"/>
+                                    <field name="contact_num"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Principales Proveedores (Solo para independientes)">
+                            <field name="provider_refs">
+                                <tree>
+                                    <field name="provider_ref" invisible="1"/>
+                                    <field name="names"/>
+                                    <field name="contact_num"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Informacion sobre Personas Politicamente Expuestas (PEPs)">
+                            <group>
+                                <field name="question_pep"/>
+                                <field name="gobv_position"/>
+                                <field name="position_date"/>
+                                <field name="gobv_country"/>
+                            </group>
+                            <group>
+                                <field name="gobv_institution"/>
+                                <field name="gobv_country"/>
+                            </group>
+                            <group>
+                                <field name="question2_pep"/>
+                                <field name="pep_name"/>
+                                <field name="afinity_lvl"/>
+                                <field name="gobv_position2"/>
+                            </group>
+                            <group>
+                                <field name="position_date2"/>
+                                <field name="gobv_institution2"/>
+                                <field name="gobv_country2"/>
+                            </group>
+                        </group>
+
+                        <group string="Informacion sobre los productos">
+                            <group>
+                                <field name="inter_type"/>
+                                <field name="fideicom_nombre"/>
+                                <field name="fideicom_type"/>
+                            </group>
+                            <group>
+                                <field name="aprox_amount_proj"/>
+                            </group>
+                            <group>
+                                <p>Monto economico total esperado del aporte</p>
+                                <field name="amount_10"/>
+                                <field name="amount_10_40"/>
+                                <field name="amount_40"/>
+                            </group>
+                            <group>
+                                <field name="initial_input"/>
+                                <field name="input_type"/>
+                            </group>
+                        </group>
+
+                        <group string="Volumen Mensual y forma de Transacciones">
+                            <group>
+                                <p>Cantidad de transacciones esperadas al año</p>
+                                <field name="unique_input"/>
+                                <field name="anual_2_3"/>
+                                <field name="anual_more"/>
+                            </group>
+                            <group>
+                                <p>Tipo Principal de aporte</p>
+                                <field name="transaction_cash"/>
+                                <field name="transaction_check"/>
+                                <field name="transaction_input"/>
+                            </group>
+                            <group>
+                                <p>Canal transaccional</p>
+                                <field name="channel_transactions_intl_banks"/>
+                                <field name="channel_deposit_banks"/>
+                            </group>
+                        </group>
+
+                        <group string="Proposito de la Negociacion">
+                            <field name="negotiation_purpose" nolabel="1"/>
+                        </group>
+
+                        <group string="Origen de los Fondos">
+                            <field name="funds_origin" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="real_estate_form_diligence_tree" model="ir.ui.view">
+            <field name="name">Formulario de debida diligencia</field>
+            <field name="model">real.estate.custom.doc.formulario</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="lastname"/>
+                    <field name="email"/>
+                    <field name="doc_type"/>
+                    <field name="id_doc"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="real_estate_form_diligence_fide_tree" model="ir.ui.view">
+            <field name="name">Formulario de debida diligencia</field>
+            <field name="model">real.estate.custom.doc.formulario.fideicomitente</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="lastname"/>
+                    <field name="email"/>
+                    <field name="doc_type"/>
+                    <field name="id_doc"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="formulario_diligence_action_window">
+            <field name="name">Formularion de Vinculacion</field>
+            <field name="res_model">real.estate.custom.doc.formulario</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="formulario_diligence_fide_action_window">
+            <field name="name">Formularion de Vinculacion Fideicomiso</field>
+            <field name="res_model">real.estate.custom.doc.formulario.fideicomitente</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Formulario de Debida Diligencia" id="formulario_diligence_view" parent="formulario"
+                  action="formulario_diligence_action_window"/>
+
+         <menuitem name="Formulario de Debida Diligencia Fideicomiso" id="formulario_diligence_fide_view" parent="formulario"
+                  action="formulario_diligence_fide_action_window"/>
+    </data>
+</odoo>

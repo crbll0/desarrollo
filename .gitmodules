@@ -1,4 +1,0 @@
-[submodule "OCA/reporting-engine"]
-	path = OCA/reporting-engine
-	url = git@github.com:OCA/reporting-engine.git
-	branch = 12.0

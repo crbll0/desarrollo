@@ -1,0 +1,4 @@
+[submodule "OCA/role-policy"]
+	path = OCA/role-policy
+	url = git@github.com:OCA/role-policy.git
+	branch = 13.0

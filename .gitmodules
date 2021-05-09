@@ -2,3 +2,8 @@
 	path = OCA/role-policy
 	url = git@github.com:OCA/role-policy.git
 	branch = 13.0
+
+[submodule "OCA/reporting-engine"]
+	path = OCA/reporting-engine
+	url = git@github.com:OCA/reporting-engine.git
+	branch = 13.0

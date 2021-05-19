@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="system_core_view" model="ir.ui.view">
+            <field name="name">System core view</field>
+            <field name="model">sistema.core</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Res Partner">
+                            <field name="res_partner"/>
+                        </group>
+                        <group string="Account move">
+                            <field name="account_move"/>
+                        </group>
+                        <group string="Products">
+                            <field name="product"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="system_core_tree_view" model="ir.ui.view">
+            <field name="name">System core tree</field>
+            <field name="model">sistema.core</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product"/>
+                    <field name="account_move"/>
+                    <field name="res_partner"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="system_core_action" model="ir.actions.act_window">
+            <field name="name">Sistema Core</field>
+            <field name="res_model">sistema.core</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <act_window id="system_core_action"-->
+<!--                    res_model="sistema.core"-->
+<!--                    name="System Core"-->
+<!--                    view_mode="tree,form"-->
+<!--        />-->
+
+        <menuitem id="cevaldom-bill-menu"
+                  string="Cevaldom Billing Information"
+                  parent="account.menu_account_config"
+                  action="cevaldom-bill.system_core_action"
+        />
+q
+    </data>
+</odoo>

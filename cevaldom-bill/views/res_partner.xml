@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="res_partner_bill_calc" model="ir.ui.view">
+            <field name="name">Res partner bill calculation</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="internal_notes" position="after">
+                    <page name="bill_info" string="Billing information">
+                        <group string="Billing Information">
+                            <field name="entity_name"/>
+                            <field name="entity_code"/>
+                            <field name="person_type"/>
+                            <field name="document_type"/>
+                        </group>
+                        <group>
+                            <field name="entity_address"/>
+                            <field name="entity_district"/>
+                            <field name="entity_province"/>
+                            <field name="entity_country"/>
+                        </group>
+                        <group>
+                            <field name="entity_type"/>
+                            <field name="entity_collection"/>
+                        </group>
+                        <group>
+                            <field name="id_holder"/>
+                            <field name="id_issuer"/>
+                            <field name="id_participant"/>
+                            <field name="id_entity_block"/>
+                            <field name="bill_id" invisible="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

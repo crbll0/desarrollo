@@ -12,3 +12,8 @@
 	path = crbll0/growit_employee
 	url = git@github.com:crbll0/growit_employee.git
 	branch = main
+
+[submodule "OCA/geospatial"]
+	path = OCA/geospatial
+	url = git@github.com:OCA/geospatial.git
+	branch = 12.0

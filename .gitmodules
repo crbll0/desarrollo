@@ -12,3 +12,8 @@
 	path = crbll0/growit_employee
 	url = git@github.com:crbll0/growit_employee.git
 	branch = main
+
+[submodule "crbll0/grow_real_estate"]
+	path = crbll0/grow_real_estate
+	url = git@github.com:crbll0/grow_real_estate.git
+	branch = 13.0

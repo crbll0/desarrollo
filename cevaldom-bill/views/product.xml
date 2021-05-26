@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">CoreSystem ProductTemplate</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="before">
+                    <field name="id_billing_service"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

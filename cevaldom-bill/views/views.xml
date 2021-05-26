@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <record id="core_system_tree_view" model="ir.ui.view">
+            <field name="name">CoreSystem Tree</field>
+            <field name="model">core.system</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="core_system_form_view" model="ir.ui.view">
+            <field name="name">CoreSystem Form</field>
+            <field name="model">core.system</field>
+            <field name="arch" type="xml">
+                <form>
+                  <header>
+                    <field name="state" widget="statusbar"/>
+                  </header>
+                  <sheet>
+                    <div name="button_box" class="oe_button_box">
+
+                    </div>
+                    <group>
+                      <group>
+                        <field name="date"/>
+                      </group>
+                    </group>
+                    <notebook>
+                      <page string="Detalle">
+                        <group>
+                            <field name="line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="core_id" invisible="1"/>
+                                    <field name="process_date"/>
+                                    <field name="processed_state"/>
+                                    <field name="billing_period"/>
+                                    <field name="id_billing_calculation"/>
+                                    <field name="payment_reference"/>
+                                    <field name="billing_date"/>
+                                    <field name="billing_currency"/>
+                                    <field name="ind_invoice_core"/>
+                                    <field name="ind_web_service"/>
+                                    <field name="ind_reject_core"/>
+                                    <field name="id_billing_detail"/>
+                                    <field name="service_rate"/>
+                                    <field name="quantity"/>
+                                    <field name="net_amount"/>
+                                    <field name="id_billing_service"/>
+                                    <field name="entity_code"/>
+                                    <field name="person_type"/>
+                                    <field name="document_type"/>
+                                    <field name="entity_name"/>
+                                    <field name="entity_address"/>
+                                    <field name="entity_district"/>
+                                    <field name="entity_province"/>
+                                    <field name="entity_type"/>
+                                    <field name="entity_collection"/>
+                                    <field name="id_holder"/>
+                                    <field name="id_issuer"/>
+                                    <field name="id_participant"/>
+                                    <field name="id_entity_block"/>
+                                </tree>
+                            </field>
+                        </group>
+                      </page>
+                    </notebook>
+                  </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="core_system_action" model="ir.actions.act_window">
+            <field name="name">Core System</field>
+            <field name="res_model">core.system</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="core_system_menu"
+                  string="Core Billing Process"
+                  parent="account_accountant.menu_accounting"
+                  action="core_system_action"
+        />
+
+    </data>
+</odoo>

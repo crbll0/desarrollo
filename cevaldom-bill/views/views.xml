@@ -16,6 +16,7 @@
             <field name="arch" type="xml">
                 <form>
                   <header>
+                      <button name="import_data" type="object" string="Cargar"/>
                     <field name="state" widget="statusbar"/>
                   </header>
                   <sheet>
@@ -33,34 +34,35 @@
                             <field name="line_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="core_id" invisible="1"/>
+                                    <field name="id_billing_calc_process" invisible="1"/>
                                     <field name="process_date"/>
                                     <field name="processed_state"/>
                                     <field name="billing_period"/>
                                     <field name="id_billing_calculation"/>
-                                    <field name="payment_reference"/>
-                                    <field name="billing_date"/>
-                                    <field name="billing_currency"/>
-                                    <field name="ind_invoice_core"/>
-                                    <field name="ind_web_service"/>
-                                    <field name="ind_reject_core"/>
-                                    <field name="id_billing_detail"/>
-                                    <field name="service_rate"/>
-                                    <field name="quantity"/>
-                                    <field name="net_amount"/>
+                                    <field name="payment_reference" invisible="1"/>
+                                    <field name="billing_date" invisible="1"/>
+                                    <field name="billing_currency" invisible="1"/>
+                                    <field name="ind_invoice_core" invisible="1"/>
+                                    <field name="ind_web_service" invisible="1"/>
+                                    <field name="ind_reject_core" invisible="1"/>
+                                    <field name="id_billing_detail" invisible="1"/>
+                                    <field name="service_rate" invisible="1"/>
+                                    <field name="quantity" invisible="1"/>
+                                    <field name="net_amount" invisible="1"/>
                                     <field name="id_billing_service"/>
-                                    <field name="entity_code"/>
-                                    <field name="person_type"/>
-                                    <field name="document_type"/>
+                                    <field name="entity_code" invisible="1"/>
+                                    <field name="person_type" invisible="1"/>
+                                    <field name="document_type" invisible="1"/>
                                     <field name="entity_name"/>
-                                    <field name="entity_address"/>
-                                    <field name="entity_district"/>
-                                    <field name="entity_province"/>
-                                    <field name="entity_type"/>
-                                    <field name="entity_collection"/>
-                                    <field name="id_holder"/>
-                                    <field name="id_issuer"/>
-                                    <field name="id_participant"/>
-                                    <field name="id_entity_block"/>
+                                    <field name="entity_address" invisible="1"/>
+                                    <field name="entity_district" invisible="1"/>
+                                    <field name="entity_province" invisible="1"/>
+                                    <field name="entity_type" invisible="1"/>
+                                    <field name="entity_collection" invisible="1"/>
+                                    <field name="id_holder" invisible="1"/>
+                                    <field name="id_issuer" invisible="1"/>
+                                    <field name="id_participant" invisible="1"/>
+                                    <field name="id_entity_block" invisible="1"/>
                                 </tree>
                             </field>
                         </group>

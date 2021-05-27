@@ -3,11 +3,10 @@
     'name': "CoreSystem - CEVALDOM",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    Integracion de Odoo con el sistema core de CEVALDOM.
+    """,
 
     'description': """
-        Long description of module's purpose
     """,
 
     'author': "GrowIT",
@@ -18,9 +17,8 @@
 
     'depends': ['base', 'account'],
 
-    # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
 #         'views/res_config.xml',
         'views/res_partner.xml',
         'views/product.xml',

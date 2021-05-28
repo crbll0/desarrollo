@@ -46,6 +46,58 @@ class CoreSystem(models.Model):
 #         _logger.info(lines)    
         self.line_ids = lines
 
+    # Its time to joderse, HEHEEE BOI
+    def depurate_contacts_services(self):
+        self.state = 'import'
+        for rec in self.line_ids:
+            if rec.id_billing_service:
+                if rec.env['product.product'].search([('id_billing_service', '=', rec.id_billing_service)]):
+                    continue
+                else:
+                    service_vals = {
+                        'id_billing_service': rec.id_billing_service,
+                        'type': 'service',
+                        'name': 'Servicio ' + str(rec.id_billing_service)
+                    }
+                    rec.env['product.product'].create(service_vals)
+            else:
+                continue
+
+        # for rec in self.line_ids:
+            if rec.entity_code:
+                if rec.env['res.partner'].search([('entity_code', '=', rec.entity_code)]):
+                    continue
+                else:
+                    contact_vals = {
+                        'name': rec.entity_name,
+                        'entity_name': rec.entity_name,
+                        'entity_code': rec.entity_code,
+                        'entity_type': rec.entity_type,
+                        'person_type': rec.person_type,
+                        'document_type': rec.document_type,
+                        'entity_address': rec.entity_address,
+                        'entity_district': rec.entity_district,
+                        'entity_province': rec.entity_province,
+                        'entity_country': rec.entity_country,
+                        'entity_collection': rec.entity_collection,
+                        'id_holder': rec.id_holder,
+                        'id_issuer': rec.id_issuer,
+                        'id_participant': rec.id_participant,
+                        'id_entity_block': rec.id_entity_block
+                    }
+                    rec.env['res.partner'].create(contact_vals)
+            else:
+                continue
+
+        # for rec in self.line_ids:
+        #     if rec.id_billing_calculation:
+        #         if rec.env['account.move'].search([('id_billing_calculation', '=', rec.id_billing_calculation)]):
+        #             continue
+        #         else:
+        #             invoice_vals = {
+        #                 'journal':
+        #             }
+
 
 class CoreSystemLines(models.Model):
     _name = 'core.system.lines'

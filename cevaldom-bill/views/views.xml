@@ -17,6 +17,7 @@
                 <form>
                   <header>
                       <button name="import_data" type="object" string="Cargar"/>
+                      <button name="depurate_contacts_services" type="object" string="Depuracion de contactos y servicios"/>
                     <field name="state" widget="statusbar"/>
                   </header>
                   <sheet>

@@ -16,6 +16,7 @@ class CoreSystem(models.Model):
     
     state = fields.Selection([
         ('draft', 'Draft'),
+        ('import', 'Import'),
         ('validate', 'Validate'),
         ('done', 'Done')
     ], default='draft')

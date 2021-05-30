@@ -3,32 +3,22 @@
 from odoo import models, fields, api
 
 
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+    
+    core_host = fields.Char(string="Host")
+    core_port = fields.Char(string="Port")
+    core_user = fields.Char(string="User")
+    core_pass = fields.Char(string="Password")
+    core_db = fields.Char(string="Database Name")
+
 
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
-    _description = 'Bill Calculus config'
 
-    bill_host = fields.Char(string="Host")
-    bill_port = fields.Char(string="Port")
-    bill_user = fields.Char(string="User")
-    bill_pass = fields.Char(string="Password")
-    bill_db_name = fields.Char(string="Database Name")
+    core_host = fields.Char(relate='company_id.core_host', readonly=False)
+    core_port = fields.Char(relate='company_id.core_port', readonly=False)
+    core_user = fields.Char(relate='company_id.core_user', readonly=False)
+    core_pass = fields.Char(relate='company_id.core_pass', readonly=False)
+    core_db = fields.Char(relate='company_id.core_db', readonly=False)
 
-    def get_values(self):
-        res = super(BillConfig, self).get_values()
-        res.update(
-            bill_host=self.env['ir.config_parameter'].sudo().get_param('cevaldom-bill.bill_host'),
-            bill_port=self.env['ir.config_parameter'].sudo().get_param('cevaldom-bill.bill_port'),
-            bill_user=self.env['ir.config_parameter'].sudo().get_param('cevaldom-bill.bill_user'),
-            bill_pass=self.env['ir.config_parameter'].sudo().get_param('cevaldom-bill.bill_pass'),
-            bill_db_name=self.env['ir.config_parameter'].sudo().get_param('cevaldom-bill.bill_db_name')
-        )
-        return res
-
-    def set_values(self):
-        super(BillConfig, self).set_values()
-        self.env['ir.config_parameter'].sudo().set_param('cevaldom-bill.bill_host', self.bill_host)
-        self.env['ir.config_parameter'].sudo().set_param('cevaldom-bill.bill_port', self.bill_port)
-        self.env['ir.config_parameter'].sudo().set_param('cevaldom-bill.bill_user', self.bill_user)
-        self.env['ir.config_parameter'].sudo().set_param('cevaldom-bill.bill_pass', self.bill_pass)
-        self.env['ir.config_parameter'].sudo().set_param('cevaldom-bill.bill_db_name', self.bill_db_name)

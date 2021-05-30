@@ -19,7 +19,7 @@
 
     'data': [
         'security/ir.model.access.csv',
-#         'views/res_config.xml',
+        'views/res_config.xml',
         'views/res_partner.xml',
         'views/product.xml',
         'views/account_move.xml',

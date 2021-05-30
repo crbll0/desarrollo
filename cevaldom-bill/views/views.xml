@@ -139,7 +139,7 @@
         <menuitem id="core_system_lines_menu"
                   string="Core Billing Detail"
                   parent="cevaldom-bill.core_system_menu_root"
-                  action="core_system_lines action"
+                  action="core_system_lines_action"
         />
 
     </data>

@@ -80,10 +80,66 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <menuitem id="core_system_menu_root"
+                  string="Core System"
+                  parent="account_accountant.menu_accounting"
+        />
+        
         <menuitem id="core_system_menu"
                   string="Core Billing Process"
-                  parent="account_accountant.menu_accounting"
+                  parent="cevaldom-bill.core_system_menu_root"
                   action="core_system_action"
+        />
+        
+        <record id="core_system_lines_tree_view" model="ir.ui.view">
+            <field name="name">CoreSystemLine Tree</field>
+            <field name="model">core.system.lines</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="core_id" invisible="1"/>
+                    <field name="id_billing_calc_process" invisible="0"/>
+                    <field name="process_date"/>
+                    <field name="processed_state"/>
+                    <field name="billing_period"/>
+                    <field name="id_billing_calculation"/>
+                    <field name="payment_reference" invisible="0"/>
+                    <field name="billing_date" invisible="0"/>
+                    <field name="billing_currency" invisible="0"/>
+                    <field name="ind_invoice_core" invisible="0"/>
+                    <field name="ind_web_service" invisible="0"/>
+                    <field name="ind_reject_core" invisible="0"/>
+                    <field name="id_billing_detail" invisible="0"/>
+                    <field name="service_rate" invisible="0"/>
+                    <field name="quantity" invisible="0"/>
+                    <field name="net_amount" invisible="0"/>
+                    <field name="id_billing_service"/>
+                    <field name="entity_code" invisible="0"/>
+                    <field name="person_type" invisible="0"/>
+                    <field name="document_type" invisible="0"/>
+                    <field name="entity_name"/>
+                    <field name="entity_address" invisible="0"/>
+                    <field name="entity_district" invisible="0"/>
+                    <field name="entity_province" invisible="0"/>
+                    <field name="entity_type" invisible="0"/>
+                    <field name="entity_collection" invisible="0"/>
+                    <field name="id_holder" invisible="0"/>
+                    <field name="id_issuer" invisible="0"/>
+                    <field name="id_participant" invisible="0"/>
+                    <field name="id_entity_block" invisible="0"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="core_system_lines_action" model="ir.actions.act_window">
+            <field name="name">Core System Lines</field>
+            <field name="res_model">core.system.lines</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="core_system_lines_menu"
+                  string="Core Billing Detail"
+                  parent="cevaldom-bill.core_system_menu_root"
+                  action="core_system_lines action"
         />
 
     </data>

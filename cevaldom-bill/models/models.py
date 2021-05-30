@@ -5,6 +5,7 @@ import logging
 from collections import namedtuple
 
 from odoo import api, models, fields
+from odoo.tools.misc import groupby
 from odoo.modules.module import get_module_resource
 
 _logger = logging.getLogger(__name__)
@@ -29,9 +30,10 @@ class CoreSystem(models.Model):
         for k in dictionary.keys():
             if k not in fields_list:
                 del d[k]
+                
         return d
     
-    def import_data(self):
+    def action_import(self):
         csv_data = get_module_resource('cevaldom-bill', 'models/', 'core_system_data.csv')
         
         fields_core_lines = self.env['core.system.lines'].fields_get().keys()
@@ -41,64 +43,101 @@ class CoreSystem(models.Model):
             reader = csv.DictReader(f)
 
             for i in reader:
-                
                 d = self.clean_dict(dict(i), fields_core_lines)
                 lines.append((0, 0, d))
-#         _logger.info(lines)    
+
         self.line_ids = lines
-
-    # Its time to joderse, HEHEEE BOI
-    def depurate_contacts_services(self):
         self.state = 'import'
-        for rec in self.line_ids:
-            if rec.id_billing_service:
-                if rec.env['product.product'].search([('id_billing_service', '=', rec.id_billing_service)]):
-                    continue
-                else:
-                    service_vals = {
-                        'id_billing_service': rec.id_billing_service,
+
+    def action_validate(self):
+        Product = self.env['product.product']
+        Partner = self.env['res.partner']
+        
+        service_worked = []
+        partner_worked = []
+        for line in self.line_ids:
+            if line.id_billing_service not in service_worked:
+                if not Product.search([('id_billing_service', '=', line.id_billing_service)]):
+                    Product.create({
+                        'id_billing_service': line.id_billing_service,
                         'type': 'service',
-                        'name': 'Servicio ' + str(rec.id_billing_service)
+                        'default_code': line.id_billing_service,
+                        'name': 'Servicio ' + str(line.id_billing_service)
+                    })
+
+            if line.entity_code not in partner_worked:
+                if not Partner.search([('entity_code', '=', line.entity_code)]):
+                    Partner.create({
+                        'name': line.entity_name,
+                        'entity_name': line.entity_name,
+                        'entity_code': line.entity_code,
+                        'entity_type': line.entity_type,
+                        'person_type': line.person_type,
+                        'document_type': line.document_type,
+                        'entity_address': line.entity_address,
+                        'entity_district': line.entity_district,
+                        'entity_province': line.entity_province,
+                        'entity_country': line.entity_country,
+                        'entity_collection': line.entity_collection,
+                        'id_holder': line.id_holder,
+                        'id_issuer': line.id_issuer,
+                        'id_participant': line.id_participant,
+                        'id_entity_block': line.id_entity_block
+                    })
+
+            service_worked.append(line.id_billing_service)
+            partner_worked.append(line.entity_code)
+            
+        self.state = 'validate'
+        
+    
+    def action_done(self):
+        Product = self.env['product.product']
+        Partner = self.env['res.partner']
+        Currency = self.env['res.currency']
+        Invoice = self.env['account.move']
+        
+        group_data_line = groupby(self.line_ids, key=lambda l: l.id_billing_calculation)
+        
+        for group, lines in group_data_line:
+            data = lines[0]
+            currency_id = Currency.search([('name', '=', data.billing_currency)])
+            invoice_data = {
+                'partner_id': Partner.search([('entity_code', '=', data.entity_code)]).id,
+                'invoice_date': data.billing_date,
+                'currency_id': currency_id.id,
+                'core_id': self.id,
+                'process_date': data.process_date,
+                'processed_state': data.processed_state,
+                'billing_period': data.billing_period,
+                'id_billing_calculation': data.id_billing_calculation,
+                'payment_reference': data.payment_reference,
+                'billing_date': data.billing_date,
+                'billing_currency': data.billing_currency,           
+                'ind_invoice_core': data.ind_invoice_core,
+                'ind_web_service': data.ind_web_service,
+                'ind_reject_core': data.ind_reject_core,
+                'id_billing_detail': data.id_billing_detail,
+                'type': 'out_invoice',
+                'invoice_line_ids': [],
+            }
+            
+            for line in lines:
+                invoice_data['invoice_line_ids'].append((
+                    0, 0, {
+                        'product_id': Product.search([
+                            ('id_billing_service', '=', line.id_billing_service)
+                        ]).id,
+                        'quantity': line.quantity,
+                        'price_unit': line.service_rate,
+                        
                     }
-                    rec.env['product.product'].create(service_vals)
-            else:
-                continue
-
-        # for rec in self.line_ids:
-            if rec.entity_code:
-                if rec.env['res.partner'].search([('entity_code', '=', rec.entity_code)]):
-                    continue
-                else:
-                    contact_vals = {
-                        'name': rec.entity_name,
-                        'entity_name': rec.entity_name,
-                        'entity_code': rec.entity_code,
-                        'entity_type': rec.entity_type,
-                        'person_type': rec.person_type,
-                        'document_type': rec.document_type,
-                        'entity_address': rec.entity_address,
-                        'entity_district': rec.entity_district,
-                        'entity_province': rec.entity_province,
-                        'entity_country': rec.entity_country,
-                        'entity_collection': rec.entity_collection,
-                        'id_holder': rec.id_holder,
-                        'id_issuer': rec.id_issuer,
-                        'id_participant': rec.id_participant,
-                        'id_entity_block': rec.id_entity_block
-                    }
-                    rec.env['res.partner'].create(contact_vals)
-            else:
-                continue
-
-        # for rec in self.line_ids:
-        #     if rec.id_billing_calculation:
-        #         if rec.env['account.move'].search([('id_billing_calculation', '=', rec.id_billing_calculation)]):
-        #             continue
-        #         else:
-        #             invoice_vals = {
-        #                 'journal':
-        #             }
-
+                ))
+                
+            Invoice.create(invoice_data)
+            
+        self.state = 'done'
+        
 
 class CoreSystemLines(models.Model):
     _name = 'core.system.lines'

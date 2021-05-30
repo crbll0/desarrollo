@@ -6,23 +6,24 @@ from odoo import models, fields, api
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
+    core_id = fields.Many2one('core.system', readonly=1)
     process_date = fields.Date(string="PROCESS DATE")
     processed_state = fields.Selection([
-        ('preliminar', 'PRELIMINAR'),
-        ('definitivo', 'DEFINITIVO')
+        ('PRELIMINAR', 'PRELIMINAR'),
+        ('DEFINITIVO', 'DEFINITIVO')
     ], string="PROCESSED STATE")
     billing_period = fields.Selection([
-        ('diario', 'DIARIO'),
-        ('mensual', 'MENSUAL'),
-        ('eventual', 'EVENTUAL')
+        ('DIARIO', 'DIARIO'),
+        ('MENSUAL', 'MENSUAL'),
+        ('EVENTUAL', 'EVENTUAL')
         ], string="BILLING PERIOD")
     id_billing_calculation = fields.Integer(string="ID BILLING CALCULATION")
     payment_reference = fields.Char(string="PAYMENT REFERENCE")
     billing_date = fields.Date(string="BILLING DATE")
     billing_currency = fields.Selection([
-        ('dop', 'DOP'),
-        ('usd', 'USD'),
-        ('eur', 'EUR')
+        ('DOP', 'DOP'),
+        ('USD', 'USD'),
+        ('EUR', 'EUR')
     ],string="BILLING CURRENCY")
     ind_invoice_core = fields.Integer(string="IND INVOICE CORE")
     ind_web_service = fields.Integer(string="IND WEB SERVICE")

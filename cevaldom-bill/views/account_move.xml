@@ -8,7 +8,9 @@
                 <xpath expr="//notebook" position="inside">
                     <page name="core_system" string="Core System Information">
                         <group>
+                            <field name="core_id"/>
                             <field name="process_date"/>
+                            
                             <field name="processed_state"/>
                             <field name="billing_period"/>
                             <field name="id_billing_calculation"/>

@@ -8,8 +8,8 @@ class BillResPartner(models.Model):
 
     entity_code = fields.Char(string="ENTITY CODE")
     person_type = fields.Selection([
-        ('natural', 'NATURAL'),
-        ('juridica', 'JURIDICA')
+        ('NATURAL', 'NATURAL'),
+        ('JURIDICO', 'JURIDICO')
     ], string="PERSON TYPE")
     document_type = fields.Char(string="DOCUMENT TYPE")
 
@@ -20,9 +20,9 @@ class BillResPartner(models.Model):
     entity_country = fields.Char(string="ENTITY COUNTRY")
     entity_type = fields.Integer(string="ENTITY TYPE")
     entity_collection = fields.Selection([
-        ('titulares', 'TITULARES'),
-        ('participantes', 'PARTICIPANTES'),
-        ('emisores', 'EMISORES')
+        ('TITULARES', 'TITULARES'),
+        ('PARTICIPANTES', 'PARTICIPANTES'),
+        ('EMISORES', 'EMISORES')
     ], string="ENTITY COLLECTION")
     id_holder = fields.Integer(string="ID HOLDER")
     id_issuer = fields.Char(string="ID ISSUER")

@@ -6,6 +6,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="date"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -16,13 +17,19 @@
             <field name="arch" type="xml">
                 <form>
                   <header>
-                      <button name="import_data" type="object" string="Cargar"/>
-                      <button name="depurate_contacts_services" type="object" string="Depuracion de contactos y servicios"/>
+                      <button name="action_import" type="object" string="Importa Datos" states="draft"/>
+                      <button name="action_validate" type="object" string="Validar Datos" states="import"/>
+                      <button name="action_done" type="object" string="Crear Factura y Cerrar" states="validate"/>
                     <field name="state" widget="statusbar"/>
                   </header>
                   <sheet>
+                      <field name="move_ids" invisible="1"/>
                     <div name="button_box" class="oe_button_box">
-
+                        <button name="button_invoices" type='object' class="oe_stat_button" icon="fa-bars" attrs="{'invisible': [('move_count', '=', 0)]}">
+                            <field name="move_count"/>
+                            <span attrs="{'invisible':[('move_count','&gt;',1)]}">Factura</span>
+                            <span attrs="{'invisible':[('move_count','&lt;=',1)]}">Facturas</span>
+                        </button>
                     </div>
                     <group>
                       <group>
@@ -35,41 +42,22 @@
                             <field name="line_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="core_id" invisible="1"/>
-                                    <field name="id_billing_calc_process" invisible="1"/>
                                     <field name="process_date"/>
                                     <field name="processed_state"/>
                                     <field name="billing_period"/>
                                     <field name="id_billing_calculation"/>
-                                    <field name="payment_reference" invisible="1"/>
-                                    <field name="billing_date" invisible="1"/>
-                                    <field name="billing_currency" invisible="1"/>
-                                    <field name="ind_invoice_core" invisible="1"/>
-                                    <field name="ind_web_service" invisible="1"/>
-                                    <field name="ind_reject_core" invisible="1"/>
-                                    <field name="id_billing_detail" invisible="1"/>
-                                    <field name="service_rate" invisible="1"/>
-                                    <field name="quantity" invisible="1"/>
-                                    <field name="net_amount" invisible="1"/>
                                     <field name="id_billing_service"/>
-                                    <field name="entity_code" invisible="1"/>
-                                    <field name="person_type" invisible="1"/>
-                                    <field name="document_type" invisible="1"/>
                                     <field name="entity_name"/>
-                                    <field name="entity_address" invisible="1"/>
-                                    <field name="entity_district" invisible="1"/>
-                                    <field name="entity_province" invisible="1"/>
-                                    <field name="entity_type" invisible="1"/>
-                                    <field name="entity_collection" invisible="1"/>
-                                    <field name="id_holder" invisible="1"/>
-                                    <field name="id_issuer" invisible="1"/>
-                                    <field name="id_participant" invisible="1"/>
-                                    <field name="id_entity_block" invisible="1"/>
                                 </tree>
                             </field>
                         </group>
                       </page>
                     </notebook>
                   </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
                 </form>
             </field>
         </record>
@@ -81,12 +69,12 @@
         </record>
 
         <menuitem id="core_system_menu_root"
-                  string="Core System"
+                  name="Core System"
                   parent="account_accountant.menu_accounting"
         />
         
         <menuitem id="core_system_menu"
-                  string="Core Billing Process"
+                  name="Core Billing Process"
                   parent="cevaldom-bill.core_system_menu_root"
                   action="core_system_action"
         />
@@ -137,7 +125,7 @@
         </record>
 
         <menuitem id="core_system_lines_menu"
-                  string="Core Billing Detail"
+                  name="Core Billing Detail"
                   parent="cevaldom-bill.core_system_menu_root"
                   action="core_system_lines_action"
         />

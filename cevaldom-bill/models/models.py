@@ -14,6 +14,13 @@ _logger = logging.getLogger(__name__)
 class CoreSystem(models.Model):
     _name = 'core.system'
     _description = 'Core System'
+    _inherit = ['mail.thread']
+    
+    
+    @api.depends('move_ids')
+    def _compute_move_count(self):
+        for rec in self:
+            rec.move_count = len(rec.move_ids)
     
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -23,7 +30,10 @@ class CoreSystem(models.Model):
     ], default='draft')
     
     date = fields.Date(string="Date")
+    move_count = fields.Integer('Invoice Count', compute='_compute_move_count')
+    move_ids = fields.One2many('account.move', 'core_id')
     line_ids = fields.One2many('core.system.lines', 'core_id')
+    
     
     def clean_dict(self, dictionary, fields_list):
         d = dictionary.copy()
@@ -55,19 +65,22 @@ class CoreSystem(models.Model):
         
         service_worked = []
         partner_worked = []
+        sc = []
+        pc = []
         for line in self.line_ids:
             if line.id_billing_service not in service_worked:
                 if not Product.search([('id_billing_service', '=', line.id_billing_service)]):
-                    Product.create({
+                    service_created = Product.create({
                         'id_billing_service': line.id_billing_service,
                         'type': 'service',
                         'default_code': line.id_billing_service,
                         'name': 'Servicio ' + str(line.id_billing_service)
                     })
+                    sc.append((service_created.id, service_created.name))
 
             if line.entity_code not in partner_worked:
                 if not Partner.search([('entity_code', '=', line.entity_code)]):
-                    Partner.create({
+                    partner_created = Partner.create({
                         'name': line.entity_name,
                         'entity_name': line.entity_name,
                         'entity_code': line.entity_code,
@@ -84,6 +97,8 @@ class CoreSystem(models.Model):
                         'id_participant': line.id_participant,
                         'id_entity_block': line.id_entity_block
                     })
+                    pc.append((partner_created.id, partner_created.name))
+                    
 
             service_worked.append(line.id_billing_service)
             partner_worked.append(line.entity_code)
@@ -137,6 +152,16 @@ class CoreSystem(models.Model):
             Invoice.create(invoice_data)
             
         self.state = 'done'
+    
+    def button_invoices(self):
+        action = {
+            'name': 'Factura',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',
+            'type': 'ir.actions.act_window',
+            'domain': [('core_id', '=', self.id)]
+        }
+        return action
         
 
 class CoreSystemLines(models.Model):

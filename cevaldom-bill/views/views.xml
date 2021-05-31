@@ -33,7 +33,7 @@
                     </div>
                     <group>
                       <group>
-                        <field name="date"/>
+                        <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                       </group>
                     </group>
                     <notebook>
@@ -97,6 +97,7 @@
                     <field name="ind_web_service" invisible="0"/>
                     <field name="ind_reject_core" invisible="0"/>
                     <field name="id_billing_detail" invisible="0"/>
+                    <field name="service_name"/>
                     <field name="service_rate" invisible="0"/>
                     <field name="quantity" invisible="0"/>
                     <field name="net_amount" invisible="0"/>
@@ -121,7 +122,7 @@
         <record id="core_system_lines_action" model="ir.actions.act_window">
             <field name="name">Core System Lines</field>
             <field name="res_model">core.system.lines</field>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">tree,pivot</field>
         </record>
 
         <menuitem id="core_system_lines_menu"

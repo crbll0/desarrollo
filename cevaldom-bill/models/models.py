@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import cx_Oracle
 import logging
+
 from collections import namedtuple
 
 from odoo import api, models, fields
@@ -15,7 +17,14 @@ class CoreSystem(models.Model):
     _name = 'core.system'
     _description = 'Core System'
     _inherit = ['mail.thread']
+    _rec_name = 'date'
+    _order = 'date desc'
     
+    _sql_constraints = [
+         ('date_unique', 
+          'unique(date)',
+          'Ya esta fecha fue registrada.')
+    ]
     
     @api.depends('move_ids')
     def _compute_move_count(self):
@@ -29,12 +38,11 @@ class CoreSystem(models.Model):
         ('done', 'Done')
     ], default='draft')
     
-    date = fields.Date(string="Date")
+    date = fields.Date(string="Date", required=True)
     move_count = fields.Integer('Invoice Count', compute='_compute_move_count')
     move_ids = fields.One2many('account.move', 'core_id')
     line_ids = fields.One2many('core.system.lines', 'core_id')
-    
-    
+
     def clean_dict(self, dictionary, fields_list):
         d = dictionary.copy()
         for k in dictionary.keys():
@@ -55,6 +63,22 @@ class CoreSystem(models.Model):
             for i in reader:
                 d = self.clean_dict(dict(i), fields_core_lines)
                 lines.append((0, 0, d))
+        
+        # dsn + ":pooled"
+        company = self.env.company
+        host = company.core_host
+        port = company.core_port
+        user = company.core_user
+        password = company.core_pass
+        db = company.core_db
+        
+        if host:
+            dns = '{host}:{port}/{db}'.format(host=host, port=port, db=db)
+            cx_Oracle.connect(
+                    user,
+                    password,
+                    dsn,
+                    encoding=config.encoding)
 
         self.line_ids = lines
         self.state = 'import'
@@ -74,7 +98,7 @@ class CoreSystem(models.Model):
                         'id_billing_service': line.id_billing_service,
                         'type': 'service',
                         'default_code': line.id_billing_service,
-                        'name': 'Servicio ' + str(line.id_billing_service)
+                        'name': line.service_name,
                     })
                     sc.append((service_created.id, service_created.name))
 
@@ -102,10 +126,28 @@ class CoreSystem(models.Model):
 
             service_worked.append(line.id_billing_service)
             partner_worked.append(line.entity_code)
-            
-        self.state = 'validate'
         
-    
+        note = ""
+        service_note = ""
+        if service_worked:
+            service_note = '<div><ul> Productos/Servicios'
+            for service in sc:
+                service_note += "<li><a href='#' data-oe-model='product.product' data-oe-id='%d'>%s</a></li>" % service
+
+            service_note += '</ul></div>'
+        
+        partner_note = ""
+        if partner_worked:
+            partner_note = '<div><ul> Contactos'
+            for partner in pc:
+                partner_note += "<li><a href='#' data-oe-model='product.product' data-oe-id='%d'>%s</a></li>" % partner
+
+            partner_note += '</ul></div>'
+        
+        note ='Objectos Creados:' + service_note + partner_note
+        self.message_post(body='<p>%s</p>' % note, message_type='comment', subtype_xmlid='mail.mt_note')
+        self.state = 'validate'
+
     def action_done(self):
         Product = self.env['product.product']
         Partner = self.env['res.partner']
@@ -200,6 +242,7 @@ class CoreSystemLines(models.Model):
     
     # ProducProduct Fields-------------------------------
     id_billing_service = fields.Integer(string="ID BILLING SERVICE")
+    service_name = fields.Char('SERVICE NAME')
 
     # ResPartner Fields-------------------------------
     entity_code = fields.Char(string="ENTITY CODE")

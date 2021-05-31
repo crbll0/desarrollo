@@ -13,7 +13,7 @@
     'website': "",
 
     'category': 'Uncategorized',
-    'version': '0.1',
+    'version': '1.1',
 
     'depends': ['base', 'account'],
 
@@ -25,4 +25,6 @@
         'views/account_move.xml',
         'views/views.xml'
     ],
+    
+    'external_dependencies': {'python': ['cx_Oracle']}
 }

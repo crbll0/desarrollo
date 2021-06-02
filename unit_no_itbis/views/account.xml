@@ -1,0 +1,15 @@
+<odoo>
+    <data inherit_id="account.report_invoice_document">
+        <xpath expr="//th[@name='th_taxes']" position="after">
+            <td name="th_unit_no_itbis" class="text-right">
+                <span>Precio unitario sin ITBIS</span>
+            </td>
+        </xpath>
+
+        <xpath expr="//tbody[1]/t[3]/tr[1]/t[1]/td[5]" position="after">
+            <td name="td_unit_no_itbis" class="text-right">
+                <span t-esc='"{:,.2f}".format(float(line.unit_price)/1.18)'></span>
+            </td>
+        </xpath>
+    </data>
+</odoo>

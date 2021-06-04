@@ -1,15 +1,17 @@
 <odoo>
-  <data inherit_id="sale.report_saleorder_document">
-      <xpath expr="//th[@name='th_taxes']" position="after">
-        <th class="text-right" name="th_unit_no_itbis">
-          Monto sin ITBIS
-        </th>
-      </xpath>
+  <data> 
+      <template id="sale_order_inherit" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//th[@name='th_taxes']" position="after">
+            <th class="text-right" name="th_unit_no_itbis">
+              Precio S/ITBIS
+            </th>
+          </xpath>
 
-      <xpath expr="//td[@name='td_taxes']" position="after">
-          <td class="text-right">
-            <span t-esc='"{:,.2f}".format(float(line.unit_price)/1.18)'/>
-          </td>
-      </xpath>
+          <xpath expr="//td[@name='td_taxes']" position="after">
+              <td class="text-right">
+                <span t-esc='"{:,.2f}".format(float(line.price_unit)/1.18)'/>
+              </td>
+          </xpath>
+      </template>
   </data>
 </odoo>

@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+    <template inherit_id="account.report_invoice_document" id="inherit_account_letra_cambio">
+      <xpath expr="//div[@id='qrcode']" position="after">
+        <t t-if="o.invoice_payment_term_id.id != 1 and not o.invoice_date_due == o.invoice_date">
+          <div style="font-size: small;">
+            <table class="table table-sm">
+              <tr>
+                <td>
+                  <div class="col-3 mb4">
+                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 45px;" alt="Logo"/>
+                  </div>
+                  <br/>
+                  RNC: <span t-field="o.company_id.vat"/>
+                </td>
+                <td><br/><center>
+                  Letra de Cambio
+                </center></td>
+                <td class="text-right">
+                  Fecha: <span t-esc="o.invoice_date"/> <br/>
+                  Vencimiento: <span t-esc="o.invoice_date_due"/> <br/>
+                  Valor: <span t-esc="o.amount_total"/> <br/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  Señores: <strong t-field="o.partner_id.name"/> quien en lo adelante se denominara El DEUDOR. <br/>
+                  <br/>
+                  Se sirve de pagar esta unica LETRA DE CAMBIO a la orden de: <strong t-field="o.company_id.name"/> <br/>
+                  la cantidad de: <strong t-field="o.currency_id.symbol"/><strong t-field="o.amount_total"/>
+                  Valor recibido en mercancia y/o servicios, cargados a la cuenta del Deudor, amparados por la FACTURA NUMERO: <strong t-field="o.l10n_latam_document_number"/>
+                  <br/>
+                  <br/>
+                  El no cumplimiento a su fecha de vencimiento devenga de 4% de interes mensual
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td><br/>
+                  <div class="text-center"><hr style="background-color: black;margin: -1px;"/>
+                    <span>Firma Autorizada</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </t>
+    </xpath>
+    </template>
+  </data>
+</odoo>

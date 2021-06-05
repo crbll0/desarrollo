@@ -1,0 +1,106 @@
+<odoo>
+    <data>
+
+    <report id="report_cuadre_caja"
+        model="wizard.cuadre.caja"
+        string="Cuadre de Caja"
+        report_type="qweb-pdf"
+        name="cuadre_caja.report_cuadre_caja_view"
+        menu="False"/>
+
+    <template id="report_cuadre_caja_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 1px solid black;">
+                <h3 class="text-center">Cuadre de Caja
+                    <span style="font-size: 14px;">
+                        <strong>Desde</strong>: <t t-esc="date_from"/> <strong>a</strong>: <t t-esc="date_to"/></span>
+                </h3>
+                
+                
+                <ul class="list-inline">
+                    <li class="list-inline-item">Pag:</li>
+                    <li class="list-inline-item">
+                        <span class="page"/>
+                    </li>
+                    <li class="list-inline-item">/</li>
+                    <li class="list-inline-item">
+                        <span class="topage"/>
+                    </li>
+                </ul>
+            </div>
+            
+            <t t-set="total_general" t-value="0"/>
+            
+            <div class="article mt0 o_report_layout_standard">
+                
+                <table class="table table-condensed table-striped table-sm" 
+                       style="font-size:small;" t-foreach='journals' t-as='journal'>
+                    <t t-set="total_journal" t-value="0"/>
+                    <tr>
+                        <th colspan="100"><span t-esc='journal.name'/></th>
+                    </tr>
+                    <tr>
+                        <th style="width:10%">Fecha</th>
+                        <th style="width:10%">Ref/Codigo</th>
+                        <th class="" style="width:35%">Cliente</th>
+                        <th class="">Circular</th>
+                        <th class="text-right" >Importe</th>
+                    </tr>
+                    <tr t-foreach='byjournal[journal.id]' t-as="p">
+                        <td style="width:10%"><t t-esc='p.payment_date'/></td>
+                        <td style="width:10%"><t t-esc='p.partner_id.ref'/></td>
+                        <td style="width:35%"><t t-esc='p.partner_id.name'/></td>
+                        <td><t t-esc='p.communication'/></td>
+                        <td class="text-right"><t t-esc='p.amount' t-options="{'widget': 'monetary', 'display_currency': p.currency_id}"/></td>
+                        <t t-set="total_journal" t-value="total_journal + p.amount"/>
+                    </tr>
+                        
+                    <tr>
+                        <td colspan="4">Total <t t-esc='journal.name'/></td>
+
+                        <td class="text-right">
+                            <t t-esc='total_journal'
+                               />
+                        </td>
+                        
+                        <t t-set="total_general" t-value="total_general + total_journal"/>
+
+                    </tr>
+                </table>
+                
+<!--                 
+                <table class="table table-condensed table-sm" 
+                       style="font-size:small;">
+                    <tr>
+                        <td>Total de Importe Resividos</td>
+                        <td>
+                            <t t-set="total_general"/>
+                        </td>
+                    </tr>
+
+                </table> -->
+            </div>
+            
+            
+            
+            
+            <div class="footer o_standard_footer" style="border-top: 1px solid black;">
+                <div class="row text-center">
+                    <div class="col col-12 text-center">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    </data>
+</odoo>
